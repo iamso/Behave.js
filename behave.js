@@ -481,7 +481,7 @@
 
                 if(!utils.fenceRange()){ return; }
     
-                if(e.keyCode == 8){
+                if(e.keyCode == 8 && !e.altKey) {
                     utils.preventDefaultEvent(e);
                                 
                     utils._callHook('delete:before');

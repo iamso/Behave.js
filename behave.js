@@ -103,7 +103,8 @@
                 { open: "'", close: "'", canBreak: false },
                 { open: "(", close: ")", canBreak: false },
                 { open: "[", close: "]", canBreak: true },
-                { open: "{", close: "}", canBreak: true }
+                { open: "{", close: "}", canBreak: true },
+                { open: "<", close: ">", canBreak: false }
             ]
 
         },

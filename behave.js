@@ -15,35 +15,35 @@
     'use strict';
     
     var BehaveHooks = BehaveHooks || (function(){
-		var hooks = {};
-		
-		return {
-		    add: function(hookName, fn){
-			    if(typeof hookName == "object"){
-			    	var i;
-			    	for(i=0; i<hookName.length; i++){
-				    	var theHook = hookName[i];
-				    	if(!hooks[theHook]){
-					    	hooks[theHook] = [];
-				    	}
-				    	hooks[theHook].push(fn);
-			    	}
-			    } else {
-				    if(!hooks[hookName]){
-				    	hooks[hookName] = [];
-			    	}
-			    	hooks[hookName].push(fn);
-			    }
-		    },
-		    get: function(hookName){
-			    if(hooks[hookName]){
-			    	return hooks[hookName];
-		    	}
-		    }
-	    };
-	    
-	})(),
-	Behave = Behave || function (userOpts) {
+        var hooks = {};
+        
+        return {
+            add: function(hookName, fn){
+                if(typeof hookName == "object"){
+                    var i;
+                    for(i=0; i<hookName.length; i++){
+                        var theHook = hookName[i];
+                        if(!hooks[theHook]){
+                            hooks[theHook] = [];
+                        }
+                        hooks[theHook].push(fn);
+                    }
+                } else {
+                    if(!hooks[hookName]){
+                        hooks[hookName] = [];
+                    }
+                    hooks[hookName].push(fn);
+                }
+            },
+            get: function(hookName){
+                if(hooks[hookName]){
+                    return hooks[hookName];
+                }
+            }
+        };
+        
+    })(),
+    Behave = Behave || function (userOpts) {
 
         if (typeof String.prototype.repeat !== 'function') {
             String.prototype.repeat = function(times) {
@@ -108,42 +108,42 @@
 
         },
         utils = {
-        	
-        	_callHook: function(hookName, passData){
-    			var hooks = BehaveHooks.get(hookName);
-	    		passData = typeof passData=="boolean" && passData === false ? false : true;
-	    		
-	    		if(hooks){
-			    	if(passData){
-				    	var theEditor = defaults.textarea,
-				    		textVal = theEditor.value,
-				    		caretPos = utils.cursor.get(),
-				    		i;
-				    	
-				    	for(i=0; i<hooks.length; i++){
-					    	hooks[i].call(undefined, {
-					    		editor: {
-						    		element: theEditor,
-						    		text: textVal,
-						    		levelsDeep: utils.levelsDeep()
-					    		},
-						    	caret: {
-							    	pos: caretPos
-						    	},
-						    	lines: {
-							    	current: utils.cursor.getLine(textVal, caretPos),
-							    	total: utils.editor.getLines(textVal)
-						    	}
-					    	});
-				    	}
-			    	} else {
-				    	for(i=0; i<hooks.length; i++){
-				    		hooks[i].call(undefined);
-				    	}
-			    	}
-		    	}
-	    	},
-        	
+            
+            _callHook: function(hookName, passData){
+                var hooks = BehaveHooks.get(hookName);
+                passData = typeof passData=="boolean" && passData === false ? false : true;
+                
+                if(hooks){
+                    if(passData){
+                        var theEditor = defaults.textarea,
+                            textVal = theEditor.value,
+                            caretPos = utils.cursor.get(),
+                            i;
+                        
+                        for(i=0; i<hooks.length; i++){
+                            hooks[i].call(undefined, {
+                                editor: {
+                                    element: theEditor,
+                                    text: textVal,
+                                    levelsDeep: utils.levelsDeep()
+                                },
+                                caret: {
+                                    pos: caretPos
+                                },
+                                lines: {
+                                    current: utils.cursor.getLine(textVal, caretPos),
+                                    total: utils.editor.getLines(textVal)
+                                }
+                            });
+                        }
+                    } else {
+                        for(i=0; i<hooks.length; i++){
+                            hooks[i].call(undefined);
+                        }
+                    }
+                }
+            },
+            
             defineNewLine: function(){
                 var ta = document.createElement('textarea');
                 ta.value = "\n";
@@ -166,10 +166,10 @@
                 }
             },
             cursor: {
-	            getLine: function(textVal, pos){
-		        	return ((textVal.substring(0,pos)).split("\n")).length;
-	        	},
-	            get: function() {
+                getLine: function(textVal, pos){
+                    return ((textVal.substring(0,pos)).split("\n")).length;
+                },
+                get: function() {
 
                     if (typeof document.createElement('textarea').selectionStart==="number") {
                         return defaults.textarea.selectionStart;
@@ -252,9 +252,9 @@
             },
             editor: {
                 getLines: function(textVal){
-		        	return (textVal).split("\n").length;
-	        	},
-	            get: function(){
+                    return (textVal).split("\n").length;
+                },
+                get: function(){
                     return defaults.textarea.value.replace(/\r/g,'');
                 },
                 set: function(data){
@@ -349,13 +349,13 @@
                 }
             },
             removeEvent: function addEvent(element, eventName, func){
-	            if (element.addEventListener){
-	                element.removeEventListener(eventName,func,false);
-	            } else if (element.attachEvent) {
-	                element.detachEvent("on"+eventName, func);
-	            }
-	        },
-	        
+                if (element.addEventListener){
+                    element.removeEventListener(eventName,func,false);
+                } else if (element.attachEvent) {
+                    element.detachEvent("on"+eventName, func);
+                }
+            },
+            
             preventDefaultEvent: function(e){
                 if(e.preventDefault){
                     e.preventDefault();
@@ -479,44 +479,44 @@
             },
             deleteKey: function (e) {
 
-	            if(!utils.fenceRange()){ return; }
-	
-	            if(e.keyCode == 8){
-	            	utils.preventDefaultEvent(e);
-	                            
-	            	utils._callHook('delete:before');
-	            	
-	            	var pos = utils.cursor.get(),
-	                    val = utils.editor.get(),
-	                    left = val.substring(0, pos),
-	                    right = val.substring(pos),
-	                    leftChar = left.charAt(left.length - 1),
-	                    rightChar = right.charAt(0),
-	                    i;
-	            	
-	                if( utils.cursor.selection() === false ){
-	                    for(i=0; i<charSettings.keyMap.length; i++) {
-	                        if (charSettings.keyMap[i].open == leftChar && charSettings.keyMap[i].close == rightChar) {
-	                            var edited = val.substring(0,pos-1) + val.substring(pos+1);
-	                            utils.editor.set(edited);
-	                            utils.cursor.set(pos - 1);
-	                            return;
-	                        }
-	                    }
-	                    var edited = val.substring(0,pos-1) + val.substring(pos);
-	                    utils.editor.set(edited);
-	                    utils.cursor.set(pos - 1);
-	                } else {
-	                	var sel = utils.cursor.selection(),
-	                		edited = val.substring(0,sel.start) + val.substring(sel.end);
-	                    utils.editor.set(edited);
-	                    utils.cursor.set(pos);
-	                }
-	                
-	                utils._callHook('delete:after');
-	                
-	            }
-	        }
+                if(!utils.fenceRange()){ return; }
+    
+                if(e.keyCode == 8){
+                    utils.preventDefaultEvent(e);
+                                
+                    utils._callHook('delete:before');
+                    
+                    var pos = utils.cursor.get(),
+                        val = utils.editor.get(),
+                        left = val.substring(0, pos),
+                        right = val.substring(pos),
+                        leftChar = left.charAt(left.length - 1),
+                        rightChar = right.charAt(0),
+                        i;
+                    
+                    if( utils.cursor.selection() === false ){
+                        for(i=0; i<charSettings.keyMap.length; i++) {
+                            if (charSettings.keyMap[i].open == leftChar && charSettings.keyMap[i].close == rightChar) {
+                                var edited = val.substring(0,pos-1) + val.substring(pos+1);
+                                utils.editor.set(edited);
+                                utils.cursor.set(pos - 1);
+                                return;
+                            }
+                        }
+                        var edited = val.substring(0,pos-1) + val.substring(pos);
+                        utils.editor.set(edited);
+                        utils.cursor.set(pos - 1);
+                    } else {
+                        var sel = utils.cursor.selection(),
+                            edited = val.substring(0,sel.start) + val.substring(sel.end);
+                        utils.editor.set(edited);
+                        utils.cursor.set(pos);
+                    }
+                    
+                    utils._callHook('delete:after');
+                    
+                }
+            }
         },
         charFuncs = {
             openedChar: function (_char, e) {
@@ -586,7 +586,7 @@
         init = function (opts) {
 
             if(opts.textarea){
-            	utils._callHook('init:before', false);
+                utils._callHook('init:before', false);
                 utils.deepExtend(defaults, opts);
                 utils.defineNewLine();
 
@@ -606,9 +606,9 @@
 
         this.destroy = function(){
             utils.removeEvent(defaults.textarea, 'keydown', intercept.tabKey);
-	        utils.removeEvent(defaults.textarea, 'keydown', intercept.enterKey);
-	        utils.removeEvent(defaults.textarea, 'keydown', intercept.deleteKey);
-	        utils.removeEvent(defaults.textarea, 'keypress', action.filter);
+            utils.removeEvent(defaults.textarea, 'keydown', intercept.enterKey);
+            utils.removeEvent(defaults.textarea, 'keydown', intercept.deleteKey);
+            utils.removeEvent(defaults.textarea, 'keypress', action.filter);
         };
 
         init(userOpts);

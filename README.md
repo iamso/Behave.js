@@ -131,6 +131,8 @@ The following hook names are available for use:
 	<dd><p>Called before modifying the text triggered by the keyup event</p></dd>
 	<dt><span>keydown</span></dt>
 	<dd><p>Called after modifying the text triggered by the keydown event</p></dd>
+  <dt><span>input</span></dt>
+  <dd><p>Called after modifying the text triggered by keyup, keydown, pasting or deleting</p></dd>
 </dl>
 				
 Each hook <b>excluding the init hooks</b> accept a single parameter, an object with the following information:

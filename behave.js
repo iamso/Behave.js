@@ -582,6 +582,7 @@
                 
                 utils.addEvent(defaults.textarea, 'keydown', function(){ utils._callHook('keydown'); });
                 utils.addEvent(defaults.textarea, 'keyup', function(){ utils._callHook('keyup'); });
+                utils.addEvent(defaults.textarea, 'input', function(){ utils._callHook('input'); });
             }
         },
         init = function (opts) {

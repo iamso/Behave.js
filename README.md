@@ -152,7 +152,7 @@ Each hook <b>excluding the init hooks</b> accept a single parameter, an object w
 ```
 
 ## In the Wild
-If your website u ses Behave.js, let me know on Twitter [@jakiestfu](http://twitter.com/jakiestfu)
+If your website uses Behave.js, let me know on Twitter [@jakiestfu](http://twitter.com/jakiestfu)
 
 * [**Pste**: The Simplest Paste Tool](http://pste.co/)
 

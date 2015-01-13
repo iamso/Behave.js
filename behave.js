@@ -611,6 +611,10 @@
             utils.removeEvent(defaults.textarea, 'keydown', intercept.enterKey);
             utils.removeEvent(defaults.textarea, 'keydown', intercept.deleteKey);
             utils.removeEvent(defaults.textarea, 'keypress', action.filter);
+
+            utils.removeEvent(defaults.textarea, 'keydown', function(){ utils._callHook('keydown'); });
+            utils.removeEvent(defaults.textarea, 'keyup', function(){ utils._callHook('keyup'); });
+            utils.removeEvent(defaults.textarea, 'input', function(){ utils._callHook('input'); });
         };
 
         init(userOpts);

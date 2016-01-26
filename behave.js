@@ -92,6 +92,7 @@
             overwrite: true,
             autoStrip: true,
             autoIndent: true,
+            continueList: true,
             fence: false
         },
         tab,
@@ -478,6 +479,40 @@
                     utils._callHook('enter:after');
                 }
             },
+            continueList: function (e) {
+
+                if (e.keyCode == 13) {
+
+                    utils.preventDefaultEvent(e);
+                    utils._callHook('enter:before');
+                    
+                    var pos = utils.cursor.get(),
+                        val = utils.editor.get(),
+                        left = val.substring(0, pos),
+                        right = val.substring(pos),
+                        nr = Math.max(0, left.split(/\r?\n/).length - 2),
+                        lines = val.split(/\r?\n/),
+                        line = lines[nr],
+                        match,
+                        edited;
+
+                    if (match = line.match(/\s*([\-\*\+]|\d+\.)\s/)) {
+                        if (line === match[0]) {
+                            pos -= line.length;
+                            lines[nr] = '';
+                            edited = lines.join('\n');
+                        }
+                        else {
+                            edited = left + match[0] + right;
+                            pos += match[0].length;
+                        }
+                        utils.editor.set(edited);
+                        utils.cursor.set(pos);
+                    }
+
+                    utils._callHook('enter:after');
+                }
+            },
             deleteKey: function (e) {
 
                 if(!utils.fenceRange()){ return; }
@@ -577,6 +612,7 @@
                 if(defaults.replaceTab){ utils.addEvent(defaults.textarea, 'keydown', intercept.tabKey); }
                 if(defaults.autoIndent){ utils.addEvent(defaults.textarea, 'keydown', intercept.enterKey); }
                 if(defaults.autoStrip){ utils.addEvent(defaults.textarea, 'keydown', intercept.deleteKey); }
+                if(defaults.continueList){ utils.addEvent(defaults.textarea, 'keydown', intercept.continueList); }
 
                 utils.addEvent(defaults.textarea, 'keypress', action.filter);
                 
@@ -610,6 +646,7 @@
             utils.removeEvent(defaults.textarea, 'keydown', intercept.tabKey);
             utils.removeEvent(defaults.textarea, 'keydown', intercept.enterKey);
             utils.removeEvent(defaults.textarea, 'keydown', intercept.deleteKey);
+            utils.removeEvent(defaults.textarea, 'keydown', intercept.continueList);
             utils.removeEvent(defaults.textarea, 'keypress', action.filter);
 
             utils.removeEvent(defaults.textarea, 'keydown', function(){ utils._callHook('keydown'); });

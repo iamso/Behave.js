@@ -1,0 +1,32 @@
+{
+  "name": "behave.js",
+  "version": "1.6.0",
+  "description": "A lightweight, cross browser library for adding IDE style behaviors to plain text areas",
+  "main": "behave.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamso/Behave.js.git"
+  },
+  "author": "Steve Ottoz <so@dev.so>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamso/Behave.js/issues"
+  },
+  "homepage": "https://github.com/iamso/Behave.js#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-notify": "^0.4.1",
+    "grunt-text-replace": "^0.4.0",
+    "grunt-update-json": "^0.2.1",
+    "load-grunt-config": "^0.16.0",
+    "time-grunt": "^1.0.0"
+  }
+}

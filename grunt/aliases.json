@@ -1,0 +1,14 @@
+{
+  "default": [
+    "watch"
+  ],
+  "src": [
+    "notify:src"
+  ],
+  "dist": [
+    "concat",
+    "uglify",
+    "update_json",
+    "notify:dist"
+  ]
+}

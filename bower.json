@@ -1,0 +1,28 @@
+{
+  "name": "behave.js",
+  "main": "behave.min.js",
+  "version": "1.6.0",
+  "homepage": "https://github.com/iamso/Behave.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamso/Behave.js.git"
+  },
+  "authors": [
+    "Steve Ottoz <so@dev.so>"
+  ],
+  "description": "A lightweight, cross browser library for adding IDE style behaviors to plain text areas",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    ".bower.json",
+    ".editorconfig",
+    ".git",
+    ".gitattributes",
+    ".gitignore",
+    "examples",
+    "grunt",
+    "Gruntfile.js",
+    "node_modules",
+    "src"
+  ]
+}

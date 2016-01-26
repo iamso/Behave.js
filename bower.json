@@ -1,6 +1,6 @@
 {
   "name": "behave.js",
-  "main": "behave.min.js",
+  "main": "behave.js",
   "version": "1.6.0",
   "homepage": "https://github.com/iamso/Behave.js",
   "repository": {

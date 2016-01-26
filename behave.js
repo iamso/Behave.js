@@ -5,8 +5,8 @@
  * Released under the MIT Licence
  * http://opensource.org/licenses/MIT
  *
- * Github:  http://github.com/jakiestfu/Behave.js/
- * Version: 1.5
+ * Github:  http://github.com/iamso/Behave.js/
+ * Version: 1.6.0
  */
 
 

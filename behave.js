@@ -6,7 +6,7 @@
  * http://opensource.org/licenses/MIT
  *
  * Github:  http://github.com/iamso/Behave.js/
- * Version: 1.6.0
+ * Version: 1.6.1
  */
 (function(undefined){
 
@@ -494,7 +494,7 @@
                         match,
                         edited;
 
-                    if (match = line.match(/\s*([\-\*\+]|\d+\.)\s/)) {
+                    if (match = line.match(/\s*([\-\–\—\+\*\•\·\»\>]|\d+\.)\s/)) {
                         if (line === match[0]) {
                             pos -= line.length;
                             lines[nr] = '';

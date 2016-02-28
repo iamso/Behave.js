@@ -485,7 +485,7 @@
                         match,
                         edited;
 
-                    if (match = line.match(/\s*([\-\*\+]|\d+\.)\s/)) {
+                    if (match = line.match(/\s*([\-\–\—\+\*\•\·\»\>]|\d+\.)\s/)) {
                         if (line === match[0]) {
                             pos -= line.length;
                             lines[nr] = '';

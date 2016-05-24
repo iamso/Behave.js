@@ -1,7 +1,7 @@
 {
   "name": "behave.js",
   "main": "behave.js",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "homepage": "https://github.com/iamso/Behave.js",
   "repository": {
     "type": "git",

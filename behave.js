@@ -6,7 +6,7 @@
  * http://opensource.org/licenses/MIT
  *
  * Github:  http://github.com/iamso/Behave.js/
- * Version: 1.6.1
+ * Version: 1.7.0
  */
 (function(undefined){
 
@@ -109,7 +109,7 @@
         },
         utils = {
 
-            _callHook: function(hookName, passData){
+            _callHook: function(hookName, event, passData){
                 var hooks = BehaveHooks.get(hookName);
                 passData = typeof passData=="boolean" && passData === false ? false : true;
 
@@ -134,11 +134,11 @@
                                     current: utils.cursor.getLine(textVal, caretPos),
                                     total: utils.editor.getLines(textVal)
                                 }
-                            });
+                            }, event);
                         }
                     } else {
                         for(i=0; i<hooks.length; i++){
-                            hooks[i].call(undefined);
+                            hooks[i].call(undefined, event);
                         }
                     }
                 }
@@ -614,15 +614,15 @@
 
                 utils.addEvent(defaults.textarea, 'keypress', action.filter);
 
-                utils.addEvent(defaults.textarea, 'keydown', function(){ utils._callHook('keydown'); });
-                utils.addEvent(defaults.textarea, 'keyup', function(){ utils._callHook('keyup'); });
-                utils.addEvent(defaults.textarea, 'input', function(){ utils._callHook('input'); });
+                utils.addEvent(defaults.textarea, 'keydown', function(event){ utils._callHook('keydown', event); });
+                utils.addEvent(defaults.textarea, 'keyup', function(event){ utils._callHook('keyup', event); });
+                utils.addEvent(defaults.textarea, 'input', function(event){ utils._callHook('input', event); });
             }
         },
         init = function (opts) {
 
             if(opts.textarea){
-                utils._callHook('init:before', false);
+                utils._callHook('init:before', null, false);
                 utils.deepExtend(defaults, opts);
                 utils.defineNewLine();
 
@@ -635,10 +635,13 @@
                 }
 
                 action.listen();
-                utils._callHook('init:after', false);
+                utils._callHook('init:after', null, false);
             }
 
         };
+
+        this.editor = utils.editor;
+        this.cursor = utils.cursor;
 
         this.destroy = function(){
             utils.removeEvent(defaults.textarea, 'keydown', intercept.tabKey);
@@ -647,9 +650,9 @@
             utils.removeEvent(defaults.textarea, 'keydown', intercept.continueList);
             utils.removeEvent(defaults.textarea, 'keypress', action.filter);
 
-            utils.removeEvent(defaults.textarea, 'keydown', function(){ utils._callHook('keydown'); });
-            utils.removeEvent(defaults.textarea, 'keyup', function(){ utils._callHook('keyup'); });
-            utils.removeEvent(defaults.textarea, 'input', function(){ utils._callHook('input'); });
+            utils.removeEvent(defaults.textarea, 'keydown', function(event){ utils._callHook('keydown', event); });
+            utils.removeEvent(defaults.textarea, 'keyup', function(event){ utils._callHook('keyup', event); });
+            utils.removeEvent(defaults.textarea, 'input', function(event){ utils._callHook('input', event); });
         };
 
         init(userOpts);

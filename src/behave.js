@@ -631,6 +631,9 @@
 
         };
 
+        this.editor = utils.editor;
+        this.cursor = utils.cursor;
+
         this.destroy = function(){
             utils.removeEvent(defaults.textarea, 'keydown', intercept.tabKey);
             utils.removeEvent(defaults.textarea, 'keydown', intercept.enterKey);

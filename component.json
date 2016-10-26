@@ -2,7 +2,7 @@
   "name": "behave.js",
   "repository": "iamso/Behave.js",
   "description": "A lightweight, cross browser library for adding IDE style behaviors to plain text areas",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "keywords": [],
   "scripts": [
     "behave.js",
